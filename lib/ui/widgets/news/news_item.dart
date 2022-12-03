@@ -7,14 +7,16 @@ import 'package:kabarpagi/ui/constant/constant.dart';
 
 class NewsItem extends StatelessWidget {
   final NewsModel? news;
+  final VoidCallback onClick;
   const NewsItem({
     Key? key,
     required this.news,
+    required this.onClick,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => onClick(),
       child: Padding(
         padding: EdgeInsets.only(
           bottom: setHeight(20),

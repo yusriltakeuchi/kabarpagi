@@ -22,7 +22,7 @@ class NewsModel extends Serializable {
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     return NewsModel(
       source: json['source'] != null ? NewsSourceModel.fromJson(json['source']) : null,
-      title: json['title'] ?? "",
+      title: json['title'].toString().split("-").first,
       description: json['description'] ?? "",
       urlImage: json['urlToImage'] ?? "",
       publishedAt: json['publishedAt'] ?? "",

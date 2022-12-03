@@ -2,7 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/providers/news/news_provider.dart';
+import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
+import 'package:kabarpagi/ui/router/route_list.dart';
 import 'package:kabarpagi/ui/widgets/idle/loading/loading_singlebox.dart';
 import 'package:kabarpagi/ui/widgets/news/news_headline_item.dart';
 
@@ -50,6 +52,7 @@ class _HomeHeadlineItemState extends ConsumerState<HomeHeadlineItem> {
           ),
           child: NewsHeadLineItem(
             news: newsRef.items[index],
+            onClick: () => navigate.pushTo(routeNewsDetail, data: newsRef.items[index]),
           ),
         );
       },

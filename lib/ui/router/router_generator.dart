@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:kabarpagi/core/models/news/news_model.dart';
 import 'package:kabarpagi/ui/router/route_list.dart';
 import 'package:kabarpagi/ui/screens/home/home_screen.dart';
+import 'package:kabarpagi/ui/screens/news/news_detail_screen.dart';
 
 class RouterGenerator {
 
   /// Initializing route
   static Route<dynamic>? generate(RouteSettings settings) {
     /// Declaring argumen route
-    // final args = settings.arguments;
+    final args = settings.arguments;
     switch(settings.name) {
       
       /// Home Group
       case routeHome:
         return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: const RouteSettings(name: routeHome));
+      case routeNewsDetail:
+        if (args is NewsModel) {
+          return MaterialPageRoute(builder: (_) => NewsDetailScreen(
+            news: args,
+          ), settings: const RouteSettings(name: routeNewsDetail));
+        }
+        break;
+
     }
 
     return null;

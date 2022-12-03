@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/providers/news/news_provider.dart';
 import 'package:kabarpagi/core/utils/formatter/date_format_utils.dart';
+import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
 import 'package:kabarpagi/gen/assets.gen.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
+import 'package:kabarpagi/ui/router/route_list.dart';
 import 'package:kabarpagi/ui/screens/home/items/home_headline_item.dart';
 import 'package:kabarpagi/ui/widgets/idle/idle_item.dart';
 import 'package:kabarpagi/ui/widgets/idle/loading/loading_listview.dart';
@@ -192,6 +194,7 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
           children: [
             NewsItem(
               news: item,
+              onClick: () => navigate.pushTo(routeNewsDetail, data: item),
             ),
             loadNewPage && index == newsRef.items.length - 1
               ? const LoadingListView()

@@ -4,3 +4,6 @@
 /// -------------------
 /// Home route
 const routeHome = "/home";
+
+/// News route
+const routeNewsDetail = "/news/detail"; 
