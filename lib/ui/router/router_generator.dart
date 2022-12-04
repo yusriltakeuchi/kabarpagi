@@ -4,6 +4,7 @@ import 'package:kabarpagi/ui/router/route_list.dart';
 import 'package:kabarpagi/ui/screens/home/home_screen.dart';
 import 'package:kabarpagi/ui/screens/news/news_detail_screen.dart';
 import 'package:kabarpagi/ui/screens/news/news_search_screen.dart';
+import 'package:kabarpagi/ui/screens/news/news_source_screen.dart';
 import 'package:kabarpagi/ui/screens/setting/setting_screen.dart';
 
 class RouterGenerator {
@@ -27,7 +28,14 @@ class RouterGenerator {
         }
         break;
       case routeNewsSearch:
-        return MaterialPageRoute(builder: (_) => const NewsSearchScreen(), settings: const RouteSettings(name: routeNewsSearch));  
+        return MaterialPageRoute(builder: (_) => const NewsSearchScreen(), settings: const RouteSettings(name: routeNewsSearch)); 
+      case routeNewsSource:
+        if (args is NewsSourceModel) {
+          return MaterialPageRoute(builder: (_) => NewsSourceScreen(
+            source: args,
+          ), settings: const RouteSettings(name: routeNewsSource));
+        }
+        break; 
 
       /// Setting Group
       case routeSetting:

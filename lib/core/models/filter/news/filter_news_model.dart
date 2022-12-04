@@ -7,12 +7,14 @@ class FilterNewsModel extends FilterBaseModel {
   String? q;
   String? sortBy;
   int? pageSize;
+  String? sources;
   FilterNewsModel({
     this.country,
     this.language,
     this.q,
     this.sortBy,
     this.pageSize,
+    this.sources
   });
   
   @override
@@ -23,6 +25,7 @@ class FilterNewsModel extends FilterBaseModel {
     if (q != null) param['q'] = q;
     if (sortBy != null) param['sortBy'] = sortBy;
     if (pageSize != null) param['pageSize'] = pageSize;
+    if (sources != null) param['sources'] = sources;
     return param;
   }
 }

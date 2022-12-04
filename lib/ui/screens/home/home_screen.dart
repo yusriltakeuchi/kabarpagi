@@ -255,7 +255,7 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
           ),
           child: ChipItem(
             name: value.name ?? "",
-            onClick: () {},
+            onClick: () => navigate.pushTo(routeNewsSource, data: value),
           ),
         ))).values.toList(),
       ),
