@@ -35,10 +35,23 @@ class $AssetsIconsGen {
   SvgGenImage get iconUser => const SvgGenImage('assets/icons/icon_user.svg');
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/illustration_notfound.svg
+  SvgGenImage get illustrationNotfound =>
+      const SvgGenImage('assets/images/illustration_notfound.svg');
+
+  /// File path: assets/images/illustration_search.svg
+  SvgGenImage get illustrationSearch =>
+      const SvgGenImage('assets/images/illustration_search.svg');
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage extends AssetImage {

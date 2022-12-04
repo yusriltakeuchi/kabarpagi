@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/providers/news/news_provider.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
+import 'package:kabarpagi/gen/assets.gen.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
 import 'package:kabarpagi/ui/constant/themes.dart';
 import 'package:kabarpagi/ui/router/route_list.dart';
@@ -56,8 +57,10 @@ class NewsSearchBody extends ConsumerWidget {
     final newsRef = ref.watch(newsSearchProvider);
 
     if (newsRef.isLoading == false && newsRef.reachedMax == false) {
-      return const IdleNoItemCenter(
+      return IdleNoItemCenter(
         title: "Mau cari berita apa hari ini?",
+        iconPathSVG: Assets.images.illustrationSearch.path,
+        color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }
 
@@ -66,8 +69,10 @@ class NewsSearchBody extends ConsumerWidget {
     }
 
     if (newsRef.items.isEmpty) {
-      return const IdleNoItemCenter(
+      return IdleNoItemCenter(
         title: "Berita yang Anda cari tidak ditemukan",
+        iconPathSVG: Assets.images.illustrationNotfound.path,
+        color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }
 

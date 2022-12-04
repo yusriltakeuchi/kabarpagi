@@ -200,8 +200,9 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
     }
 
     if (newsRef.items.isEmpty) {
-      return const IdleNoItemCenter(
+      return IdleNoItemCenter(
         title: "Tidak ada berita",
+        color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }
 

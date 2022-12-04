@@ -103,7 +103,7 @@ class IdleNoItemCenter extends StatelessWidget {
           SvgPicture.asset(
             iconPathSVG ?? "", 
             width: setWidth(deviceWidth), 
-            height: deviceHeight * 0.4
+            height: deviceHeight * 0.3
           ),
           Text(
             title ?? " ",
