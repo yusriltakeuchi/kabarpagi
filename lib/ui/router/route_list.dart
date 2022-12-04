@@ -7,3 +7,6 @@ const routeHome = "/home";
 
 /// News route
 const routeNewsDetail = "/news/detail"; 
+
+/// Setting route
+const routeSetting = "/setting";

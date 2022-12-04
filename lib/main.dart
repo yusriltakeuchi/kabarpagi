@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:kabarpagi/core/providers/theme/theme_provider.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
 import 'package:kabarpagi/injector.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
@@ -18,18 +19,19 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkTheme = ref.watch(themeProvider);
     return MaterialApp(
       title: 'Kabar Pagi',
       navigatorKey: locator<NavigationUtils>().navigatorKey,
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       debugShowCheckedModeBanner: false,
       builder: (ctx, child) {
         setupScreenUtil(ctx);

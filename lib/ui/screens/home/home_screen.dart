@@ -1,3 +1,5 @@
+// ignore_for_file: unused_result
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/providers/news/news_provider.dart';
@@ -43,13 +45,26 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: setWidth(60),
+            padding: EdgeInsets.only(
+              right: setWidth(20),
             ),
             child: Assets.icons.iconSearch.svg(
               width: setWidth(40),
               height: setHeight(40),
               color: isDarkTheme(context) ? Colors.white : blackColor
+            ),
+          ),
+          GestureDetector(
+            onTap: () => navigate.pushTo(routeSetting),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: setWidth(60),
+              ),
+              child: Assets.icons.iconSetting.svg(
+                width: setWidth(40),
+                height: setHeight(40),
+                color: isDarkTheme(context) ? Colors.white : blackColor
+              ),
             ),
           )
         ],
@@ -89,7 +104,10 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async => ref.refresh(newsProvider),
+      onRefresh: () async {
+        ref.refresh(newsProvider);
+        ref.refresh(newsHeadlinesProvider);
+      },
       child: SingleChildScrollView(
         controller: scrollController,
         child: Column(

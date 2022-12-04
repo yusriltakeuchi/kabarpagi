@@ -3,6 +3,7 @@ import 'package:kabarpagi/core/models/news/news_model.dart';
 import 'package:kabarpagi/ui/router/route_list.dart';
 import 'package:kabarpagi/ui/screens/home/home_screen.dart';
 import 'package:kabarpagi/ui/screens/news/news_detail_screen.dart';
+import 'package:kabarpagi/ui/screens/setting/setting_screen.dart';
 
 class RouterGenerator {
 
@@ -15,6 +16,8 @@ class RouterGenerator {
       /// Home Group
       case routeHome:
         return MaterialPageRoute(builder: (_) => const HomeScreen(), settings: const RouteSettings(name: routeHome));
+      
+      /// News Group
       case routeNewsDetail:
         if (args is NewsModel) {
           return MaterialPageRoute(builder: (_) => NewsDetailScreen(
@@ -22,6 +25,10 @@ class RouterGenerator {
           ), settings: const RouteSettings(name: routeNewsDetail));
         }
         break;
+
+      /// Setting Group
+      case routeSetting:
+        return MaterialPageRoute(builder: (_) => const SettingScreen(), settings: const RouteSettings(name: routeSetting));
 
     }
 
