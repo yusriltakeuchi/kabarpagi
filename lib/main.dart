@@ -1,6 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kabarpagi/core/providers/theme/theme_provider.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
@@ -19,12 +25,47 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+
+  /// Creating precache assets
+  void precacheAssets() async {
+    final manifestJson = await rootBundle.loadString('AssetManifest.json');
+    final rawAssets = json.decode(manifestJson) as Map<String, dynamic>;
+    final images = rawAssets.keys.where((String key) => key.startsWith('assets/images')).toList();
+    final icons = rawAssets.keys.where((String key) => key.startsWith('assets/icons')).toList();
+    List<String> assets = [];
+    assets.addAll(images);
+    assets.addAll(icons);
+
+    for (var asset in assets) {
+      try {
+        if (asset.contains(".png")) {
+          precacheImage(AssetImage(asset), context);
+        } else if (asset.contains(".svg")) {
+          precachePicture(ExactAssetPicture(SvgPicture.svgStringDecoderBuilder, asset), null);
+        }
+      } catch(e) {
+        debugPrint("ERROR: $e");
+        continue;
+      }
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    precacheAssets();
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final isDarkTheme = ref.watch(themeProvider);
     return MaterialApp(
       title: 'Kabar Pagi',
