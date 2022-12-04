@@ -65,7 +65,7 @@ class _NewsDetailBodyState extends State<NewsDetailBody> {
         return <Widget>[
           SliverAppBar(
             elevation: 0,
-            expandedHeight: deviceHeight * 0.3,
+            expandedHeight: deviceHeight * (isSmallPhoneHeight(context) ? 0.35 : 0.3),
             floating: false,
             pinned: true,
             title: Text(

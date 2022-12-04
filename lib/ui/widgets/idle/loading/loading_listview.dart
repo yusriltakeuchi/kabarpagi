@@ -4,11 +4,11 @@ import 'package:kabarpagi/ui/widgets/idle/loading/loading_singlebox.dart';
 
 class LoadingListView extends StatelessWidget {
   final int length;
-  final double height;
+  final double? height;
   const LoadingListView({
     Key? key,
     this.length = 10,
-    this.height = 100,
+    this.height
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class LoadingListView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: LoadingSingleBox(
-            height: height,
+            height: height ?? setHeight(isSmallPhoneHeight(context) ? 650 : 600),
           ),
         );
       },

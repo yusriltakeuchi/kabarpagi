@@ -68,9 +68,10 @@ class NewsItem extends StatelessWidget {
             Hero(
               tag: news?.title ?? "",
               child: Container(
-                width: setWidth(320),
-                height: setHeight(300),
+                width: setWidth(isSmallPhoneHeight(context) ? 260 : 310),
+                height: setHeight(isSmallPhoneHeight(context) ? 320 : 300),
                 decoration: BoxDecoration(
+                  color: grayColor,
                   borderRadius: BorderRadius.circular(15),
                   image: news!.urlImage!.isNotEmpty
                     ? DecorationImage(

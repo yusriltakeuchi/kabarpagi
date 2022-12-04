@@ -39,7 +39,7 @@ class _HomeHeadlineItemState extends ConsumerState<HomeHeadlineItem> {
       itemCount: newsRef.items.length, 
       options: CarouselOptions(
         aspectRatio: 2,
-        height: setHeight(500),
+        height: setHeight(isSmallPhoneHeight(context) ? 550 : 500),
         viewportFraction: 0.92,
         enableInfiniteScroll: false,
         autoPlay: false,
