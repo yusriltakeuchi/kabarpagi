@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/providers/news/news_provider.dart';
+import 'package:kabarpagi/core/providers/source/source_provider.dart';
 import 'package:kabarpagi/core/utils/formatter/date_format_utils.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
 import 'package:kabarpagi/gen/assets.gen.dart';
@@ -10,8 +11,10 @@ import 'package:kabarpagi/ui/constant/constant.dart';
 import 'package:kabarpagi/ui/constant/themes.dart';
 import 'package:kabarpagi/ui/router/route_list.dart';
 import 'package:kabarpagi/ui/screens/home/items/home_headline_item.dart';
+import 'package:kabarpagi/ui/widgets/chip/chip_item.dart';
 import 'package:kabarpagi/ui/widgets/idle/idle_item.dart';
 import 'package:kabarpagi/ui/widgets/idle/loading/loading_listview.dart';
+import 'package:kabarpagi/ui/widgets/idle/loading/loading_singlebox.dart';
 import 'package:kabarpagi/ui/widgets/news/news_item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         centerTitle: false,
         title: Row(
           children: [
-            Assets.icons.iconGlobe.svg(
+            Assets.icons.iconMorning.svg(
               width: setWidth(60),
               height: setHeight(60),
               color: primaryColor
@@ -110,6 +113,7 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
       onRefresh: () async {
         ref.refresh(newsProvider);
         ref.refresh(newsHeadlinesProvider);
+        ref.refresh(sourceProvider);
       },
       child: SingleChildScrollView(
         controller: scrollController,
@@ -166,30 +170,95 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
             horizontal: setWidth(30),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Assets.icons.iconGlobe.svg(
+                width: setWidth(50),
+                height: setHeight(50),
+                color: primaryColor
+              ),
+              SizedBox(
+                width: setWidth(15),
+              ),
               Text(
-                "Hanya Untukmu",
+                "Berita Internasional",
                 style: styleTitle.copyWith(
-                  fontSize: setFontSize(50),
+                  fontSize: setFontSize(45),
                   color: isDarkTheme(context) ? Colors.white : blackColor
                 ),
               ),
-              Text(
-                "Lihat Semua",
-                style: styleSubtitle.copyWith(
-                  fontSize: setFontSize(35),
-                  color: primaryColor,
-                ),
-              )
             ],
           ),
         ),
         SizedBox(
           height: setHeight(20),
         ),
+        _sourceWidget(),
+        SizedBox(
+          height: setHeight(50),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: setWidth(30),
+          ),
+          child: Row(
+            children: [
+              Assets.icons.iconNews.svg(
+                width: setWidth(50),
+                height: setHeight(50),
+                color: primaryColor
+              ),
+              SizedBox(
+                width: setWidth(15),
+              ),
+              Text(
+                "Terbaru",
+                style: styleTitle.copyWith(
+                  fontSize: setFontSize(45),
+                  color: isDarkTheme(context) ? Colors.white : blackColor
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: setHeight(10),
+        ),
         _newsList()
       ],
+    );
+  }
+
+  Widget _sourceWidget() {
+    final sourceRef = ref.watch(sourceProvider);
+    if (sourceRef.isLoading && sourceRef.items.isEmpty) {
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: setWidth(30)
+        ),
+        child: const LoadingSingleBox(
+          height: 80,
+        ),
+      );
+    }
+
+    if (sourceRef.items.isEmpty) {
+      return const SizedBox();
+    }
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: sourceRef.items.asMap().map((index, value) => MapEntry(index, Padding(
+          padding: EdgeInsets.only(
+            left: index == 0 ? setWidth(30) : 0,
+            right: setWidth(30)
+          ),
+          child: ChipItem(
+            name: value.name ?? "",
+            onClick: () {},
+          ),
+        ))).values.toList(),
+      ),
     );
   }
 

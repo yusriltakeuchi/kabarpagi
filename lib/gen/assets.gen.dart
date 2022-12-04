@@ -19,6 +19,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_globe.svg
   SvgGenImage get iconGlobe => const SvgGenImage('assets/icons/icon_globe.svg');
 
+  /// File path: assets/icons/icon_morning.svg
+  SvgGenImage get iconMorning =>
+      const SvgGenImage('assets/icons/icon_morning.svg');
+
+  /// File path: assets/icons/icon_news.svg
+  SvgGenImage get iconNews => const SvgGenImage('assets/icons/icon_news.svg');
+
   /// File path: assets/icons/icon_notfound.svg
   SvgGenImage get iconNotfound =>
       const SvgGenImage('assets/icons/icon_notfound.svg');

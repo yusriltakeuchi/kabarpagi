@@ -5,6 +5,7 @@ import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
 import 'package:kabarpagi/gen/assets.gen.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
 import 'package:kabarpagi/ui/constant/themes.dart';
+import 'package:kabarpagi/ui/widgets/chip/chip_item.dart';
 
 class NewsDetailScreen extends StatelessWidget {
   final NewsModel? news;
@@ -176,24 +177,9 @@ class NewsDetailContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: grayColor.withOpacity(0.2)
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: setWidth(40),
-                vertical: setHeight(10)
-              ),
-              child: Text(
-                news?.source?.name ?? "",
-                style: styleSubtitle.copyWith(
-                  color: isDarkTheme(context) ? Colors.white : blackColor,
-                  fontSize: setFontSize(30)
-                ),
-              ),
-            ),
+          ChipItem(
+            name: news?.source?.name ?? "", 
+            onClick: () {}
           ),
           SizedBox(
             height: setHeight(30),

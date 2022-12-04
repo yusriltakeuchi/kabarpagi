@@ -45,21 +45,29 @@ class NewsModel extends Serializable {
 }
 
 class NewsSourceModel extends Serializable {
+  String? id;
   String? name;
+  String? country;
   NewsSourceModel({
+    this.id,
     this.name,
+    this.country,
   });
 
   factory NewsSourceModel.fromJson(Map<String, dynamic> json) {
     return NewsSourceModel(
+      id: json['id'] ?? "",
       name: json['name'] ?? "",
+      country: json['country'] ?? "",
     );
   }
   
   @override
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
+      'country': country,
     };
   }
 }
