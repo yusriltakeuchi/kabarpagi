@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kabarpagi/core/config/config.dart';
 import 'package:kabarpagi/core/data/api.dart';
 import 'package:kabarpagi/core/data/base_api_impl.dart';
 import 'package:kabarpagi/core/models/api/api_response.dart';
@@ -11,7 +12,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class BaseAPI implements BaseAPIImpl {
   Dio? _dio;
   final endpoint = locator<Api>();
-  final apiKey = "5f00d331dfd24c32a3e34d70cae204b6";
 
   /// Initialize constructors
   BaseAPI() {
