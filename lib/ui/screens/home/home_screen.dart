@@ -5,6 +5,7 @@ import 'package:kabarpagi/core/utils/formatter/date_format_utils.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
 import 'package:kabarpagi/gen/assets.gen.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
+import 'package:kabarpagi/ui/constant/themes.dart';
 import 'package:kabarpagi/ui/router/route_list.dart';
 import 'package:kabarpagi/ui/screens/home/items/home_headline_item.dart';
 import 'package:kabarpagi/ui/widgets/idle/idle_item.dart';
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: isDarkTheme(context) ? blackGrayColor : Colors.white,
         elevation: 0,
         centerTitle: false,
         title: Row(
@@ -34,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             Text(
               "Kabar Pagi",
               style: styleTitle.copyWith(
-                color: blackColor,
+                color: isDarkTheme(context) ? Colors.white : blackColor,
                 fontSize: setFontSize(55),
               ),
             ),
@@ -48,7 +49,7 @@ class HomeScreen extends StatelessWidget {
             child: Assets.icons.iconSearch.svg(
               width: setWidth(40),
               height: setHeight(40),
-              color: blackColor
+              color: isDarkTheme(context) ? Colors.white : blackColor
             ),
           )
         ],
@@ -117,7 +118,7 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
                 "Halo, Selamat Pagi Yusril",
                 style: styleTitle.copyWith(
                   fontSize: setFontSize(50),
-                  color: blackColor
+                  color: isDarkTheme(context) ? Colors.white : blackColor
                 ),
               ),
             ),
@@ -150,6 +151,7 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
                 "Hanya Untukmu",
                 style: styleTitle.copyWith(
                   fontSize: setFontSize(50),
+                  color: isDarkTheme(context) ? Colors.white : blackColor
                 ),
               ),
               Text(

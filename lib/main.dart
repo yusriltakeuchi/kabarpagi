@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Kabar Pagi',
       navigatorKey: locator<NavigationUtils>().navigatorKey,
       theme: lightTheme,
+      darkTheme: darkTheme,
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       builder: (ctx, child) {
@@ -50,8 +51,7 @@ class MyApp extends StatelessWidget {
 
 class MyBehavior extends ScrollBehavior {
   @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
+  Widget buildViewportChrome(BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;
   }
 }

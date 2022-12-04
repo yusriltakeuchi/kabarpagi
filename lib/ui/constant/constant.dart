@@ -13,6 +13,8 @@ Color get blackColor => const Color(0xff242424);
 Color get grayColor => const Color(0xff9098B1);
 Color get grayDarkColor => const Color(0xff6F7789);
 Color get redColor => const Color(0xffFB7181);
+Color blackGrayColor = const Color(0xff2D2E30);
+Color blackBGColor = const Color(0xff15161A);
 
 /// --------------
 /// Asset Location

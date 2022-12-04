@@ -31,3 +31,34 @@ final lightTheme = ThemeData(
   ),
   textSelectionTheme: TextSelectionThemeData(cursorColor: primaryColor),
 );
+
+final darkTheme = ThemeData(
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  primaryColor: blackGrayColor,
+  primarySwatch: primaryCustomSwatchDark,
+  backgroundColor: blackBGColor,
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    color: Colors.white,
+  ),
+  brightness: Brightness.dark,
+  textTheme: const TextTheme(
+    bodyText1: TextStyle(),
+    bodyText2: TextStyle(),
+  ).apply(
+    bodyColor: Colors.white, 
+    displayColor: Colors.white, 
+  ),
+  fontFamily: FontFamily.axiforma,
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: Colors.black.withOpacity(0)
+  ),
+  scaffoldBackgroundColor: blackBGColor,
+  colorScheme: const ColorScheme.dark().copyWith(
+    primary: blackGrayColor,
+    onPrimary: blackGrayColor
+  ).copyWith(
+    secondary: blackGrayColor, 
+    brightness: Brightness.dark,
+  ),
+  textSelectionTheme: TextSelectionThemeData(cursorColor: blackGrayColor),
+);

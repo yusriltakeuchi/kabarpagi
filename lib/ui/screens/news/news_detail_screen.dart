@@ -4,6 +4,7 @@ import 'package:kabarpagi/core/models/news/news_model.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
 import 'package:kabarpagi/gen/assets.gen.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
+import 'package:kabarpagi/ui/constant/themes.dart';
 
 class NewsDetailScreen extends StatelessWidget {
   final NewsModel? news;
@@ -72,14 +73,14 @@ class _NewsDetailBodyState extends State<NewsDetailBody> {
                 :  widget.news?.title ?? "",
               style: styleTitle.copyWith(
                 fontSize: setFontSize(45),
-                color: blackColor,
+                color: isDarkTheme(context) ? Colors.white : blackColor,
               ),
             ),
             leading: Padding(
               padding: const EdgeInsets.all(10),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: isDarkTheme(context) ? blackBGColor : Colors.white,
                   border: Border.all(
                     color: grayColor.withOpacity(0.4),
                     width: 1
@@ -94,21 +95,21 @@ class _NewsDetailBodyState extends State<NewsDetailBody> {
                     borderRadius: BorderRadius.circular(12),
                     child: Icon(
                       Icons.keyboard_arrow_left,
-                      color: blackColor,
+                      color: isDarkTheme(context) ? Colors.white : blackColor,
                     ),
                   ),
                 ),
               ),
             ),
-            flexibleSpace: _flexibleSpace(),
-            backgroundColor: Colors.white,
+            flexibleSpace: _flexibleSpace(context),
+            backgroundColor: isDarkTheme(context) ? blackBGColor : Colors.white,
           )
         ];
       }
     );
   }
 
-  Widget _flexibleSpace() {
+  Widget _flexibleSpace(BuildContext context) {
     return FlexibleSpaceBar(
       centerTitle: true,
       collapseMode: CollapseMode.pin,
@@ -131,9 +132,9 @@ class _NewsDetailBodyState extends State<NewsDetailBody> {
             right: 0,
             child: Container(
               height: setHeight(80),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
+              decoration: BoxDecoration(
+                color: isDarkTheme(context) ? blackBGColor : Colors.white,
+                borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(50),
                 ),
               ),
@@ -185,7 +186,7 @@ class NewsDetailContent extends StatelessWidget {
               child: Text(
                 news?.source?.name ?? "",
                 style: styleSubtitle.copyWith(
-                  color: blackColor,
+                  color: isDarkTheme(context) ? Colors.white : blackColor,
                   fontSize: setFontSize(30)
                 ),
               ),
@@ -200,7 +201,7 @@ class NewsDetailContent extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: styleTitle.copyWith(
               fontSize: setFontSize(55),
-              color: blackColor
+              color: isDarkTheme(context) ? Colors.white : blackColor
             ),
           ),
           SizedBox(
@@ -211,7 +212,7 @@ class NewsDetailContent extends StatelessWidget {
               Assets.icons.iconUser.svg(
                 width: setWidth(60),
                 height: setHeight(60),
-                color: blackColor,
+                color: isDarkTheme(context) ? Colors.white : blackColor,
               ),
               SizedBox(
                 width: setWidth(20),
@@ -220,7 +221,7 @@ class NewsDetailContent extends StatelessWidget {
                 news!.author!.isEmpty ? "Unknown" : news!.author!,
                 style: styleSubtitle.copyWith(
                   fontSize: setFontSize(35),
-                  color: blackColor,
+                  color: isDarkTheme(context) ? Colors.white : blackColor,
                 ),
               )
             ],
@@ -229,7 +230,7 @@ class NewsDetailContent extends StatelessWidget {
             height: setHeight(25),
           ),
           Divider(
-            color: blackColor.withOpacity(0.2),
+            color: isDarkTheme(context) ? Colors.white.withOpacity(0.4) : blackColor.withOpacity(0.2),
           ),
           SizedBox(
             height: setHeight(25),
@@ -238,7 +239,7 @@ class NewsDetailContent extends StatelessWidget {
             news?.content ?? "",
             style: styleSubtitle.copyWith(
               fontSize: setFontSize(40),
-              color: blackColor
+              color: isDarkTheme(context) ? Colors.white : blackColor
             ),
           )
         ],

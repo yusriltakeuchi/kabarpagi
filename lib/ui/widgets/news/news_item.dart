@@ -4,6 +4,7 @@ import 'package:kabarpagi/core/models/news/news_model.dart';
 import 'package:kabarpagi/core/utils/formatter/date_format_utils.dart';
 import 'package:kabarpagi/gen/assets.gen.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
+import 'package:kabarpagi/ui/constant/themes.dart';
 
 class NewsItem extends StatelessWidget {
   final NewsModel? news;
@@ -44,7 +45,7 @@ class NewsItem extends StatelessWidget {
                       child: Text(
                         news?.source?.name ?? "",
                         style: styleSubtitle.copyWith(
-                          color: blackColor,
+                          color: isDarkTheme(context) ? Colors.white : blackColor,
                           fontSize: setFontSize(30)
                         ),
                       ),
@@ -58,7 +59,8 @@ class NewsItem extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: styleTitle.copyWith(
-                      fontSize: setFontSize(48)
+                      fontSize: setFontSize(48),
+                      color: isDarkTheme(context) ? Colors.white : blackColor
                     ),
                   ),
                   SizedBox(
