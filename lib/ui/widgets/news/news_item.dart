@@ -79,32 +79,35 @@ class NewsItem extends StatelessWidget {
             SizedBox(
               width: setWidth(40),
             ),
-            Container(
-              width: setWidth(320),
-              height: setHeight(300),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: news!.urlImage!.isNotEmpty
-                  ? DecorationImage(
-                      image: NetworkImage(
-                        news?.urlImage ?? ""
+            Hero(
+              tag: news?.title ?? "",
+              child: Container(
+                width: setWidth(320),
+                height: setHeight(300),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: news!.urlImage!.isNotEmpty
+                    ? DecorationImage(
+                        image: NetworkImage(
+                          news?.urlImage ?? ""
+                        ),
+                        fit: BoxFit.cover
+                      )
+                    : null
+                ),
+                child: news!.urlImage!.isEmpty
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: setWidth(60),
+                        vertical: setHeight(60)
                       ),
-                      fit: BoxFit.cover
+                      child: Assets.icons.iconNotfound.svg(
+                          width: setWidth(60),
+                          height: setHeight(60)
+                        ),
                     )
-                  : null
+                  : const SizedBox(),
               ),
-              child: news!.urlImage!.isEmpty
-                ? Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: setWidth(60),
-                      vertical: setHeight(60)
-                    ),
-                    child: Assets.icons.iconNotfound.svg(
-                        width: setWidth(60),
-                        height: setHeight(60)
-                      ),
-                  )
-                : const SizedBox(),
             )
     
     

@@ -120,9 +120,12 @@ class _NewsDetailBodyState extends State<NewsDetailBody> {
             left: 0,
             right: 0,
             bottom: 0,
-            child: Image.network(
-              widget.news?.urlImage ?? "",
-              fit: BoxFit.cover,
+            child: Hero(
+              tag: widget.news?.title ?? "",
+              child: Image.network(
+                widget.news?.urlImage ?? "",
+                fit: BoxFit.cover,
+              ),
             ),
           ),
 
