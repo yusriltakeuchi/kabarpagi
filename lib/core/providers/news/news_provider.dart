@@ -15,6 +15,8 @@ final newsProvider = StateNotifierProvider.autoDispose<NewsNotifier, ListState<L
   => NewsNotifier(ref.watch(newsService)));
 final newsHeadlinesProvider = StateNotifierProvider.autoDispose<NewsHeadLineNotifier, ListState<List<NewsModel>>>((ref) 
   => NewsHeadLineNotifier(ref.watch(newsService)));
+final newsSearchProvider = StateNotifierProvider.autoDispose<NewsSearchNotifier, ListState<List<NewsModel>>>((ref) 
+  => NewsSearchNotifier(ref.watch(newsService)));
 /// --------------------
 
 
@@ -86,4 +88,26 @@ class NewsHeadLineNotifier extends StateNotifier<ListState<List<NewsModel>>> {
     }
   }
 }
+
+/// Creating news search notifier
+class NewsSearchNotifier extends StateNotifier<ListState<List<NewsModel>>> {
+  NewsService newsService;
+  NewsSearchNotifier(this.newsService) : super(ListState<List<NewsModel>>(items: []));
+
+  Future<void> search(String keyword) async {
+    state = state.copyWith(isLoading: true);
+    try {
+      var filter = FilterNewsModel();
+      filter.page = state.page;
+      filter.language = "id";
+      filter.q = keyword.toLowerCase().trim();
+      
+      final result = await newsService.getNews(param: filter.toJson());
+      state = state.copyWith(items: result.data!, isLoading: false, reachedMax: true);
+    } catch (e) {
+      state = state.copyWith(isLoading: false);
+    }
+  }
+}
+
 /// --------------------

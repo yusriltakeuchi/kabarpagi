@@ -44,14 +44,17 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(
-              right: setWidth(20),
-            ),
-            child: Assets.icons.iconSearch.svg(
-              width: setWidth(40),
-              height: setHeight(40),
-              color: isDarkTheme(context) ? Colors.white : blackColor
+          GestureDetector(
+            onTap: () => navigate.pushTo(routeNewsSearch),
+            child: Padding(
+              padding: EdgeInsets.only(
+                right: setWidth(20),
+              ),
+              child: Assets.icons.iconSearch.svg(
+                width: setWidth(40),
+                height: setHeight(40),
+                color: isDarkTheme(context) ? Colors.white : blackColor
+              ),
             ),
           ),
           GestureDetector(
