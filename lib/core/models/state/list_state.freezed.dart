@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ListState<T> {
-  T get items => throw _privateConstructorUsedError;
+  List<T> get items => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get reachedMax => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ abstract class $ListStateCopyWith<T, $Res> {
           ListState<T> value, $Res Function(ListState<T>) then) =
       _$ListStateCopyWithImpl<T, $Res, ListState<T>>;
   @useResult
-  $Res call({T items, int page, bool isLoading, bool reachedMax});
+  $Res call({List<T> items, int page, bool isLoading, bool reachedMax});
 }
 
 /// @nodoc
@@ -48,16 +48,16 @@ class _$ListStateCopyWithImpl<T, $Res, $Val extends ListState<T>>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = freezed,
+    Object? items = null,
     Object? page = null,
     Object? isLoading = null,
     Object? reachedMax = null,
   }) {
     return _then(_value.copyWith(
-      items: freezed == items
+      items: null == items
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
-              as T,
+              as List<T>,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$_ListStateCopyWith<T, $Res>
       __$$_ListStateCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({T items, int page, bool isLoading, bool reachedMax});
+  $Res call({List<T> items, int page, bool isLoading, bool reachedMax});
 }
 
 /// @nodoc
@@ -96,16 +96,16 @@ class __$$_ListStateCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = freezed,
+    Object? items = null,
     Object? page = null,
     Object? isLoading = null,
     Object? reachedMax = null,
   }) {
     return _then(_$_ListState<T>(
-      items: freezed == items
-          ? _value.items
+      items: null == items
+          ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as T,
+              as List<T>,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -126,14 +126,21 @@ class __$$_ListStateCopyWithImpl<T, $Res>
 
 class _$_ListState<T> extends _ListState<T> {
   _$_ListState(
-      {required this.items,
+      {required final List<T> items,
       this.page = 1,
       this.isLoading = false,
       this.reachedMax = false})
-      : super._();
+      : _items = items,
+        super._();
 
+  final List<T> _items;
   @override
-  final T items;
+  List<T> get items {
+    if (_items is EqualUnmodifiableListView) return _items;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_items);
+  }
+
   @override
   @JsonKey()
   final int page;
@@ -154,7 +161,7 @@ class _$_ListState<T> extends _ListState<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ListState<T> &&
-            const DeepCollectionEquality().equals(other.items, items) &&
+            const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
@@ -164,7 +171,7 @@ class _$_ListState<T> extends _ListState<T> {
 
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(items), page, isLoading, reachedMax);
+      const DeepCollectionEquality().hash(_items), page, isLoading, reachedMax);
 
   @JsonKey(ignore: true)
   @override
@@ -175,14 +182,14 @@ class _$_ListState<T> extends _ListState<T> {
 
 abstract class _ListState<T> extends ListState<T> {
   factory _ListState(
-      {required final T items,
+      {required final List<T> items,
       final int page,
       final bool isLoading,
       final bool reachedMax}) = _$_ListState<T>;
   _ListState._() : super._();
 
   @override
-  T get items;
+  List<T> get items;
   @override
   int get page;
   @override

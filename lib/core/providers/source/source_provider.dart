@@ -11,14 +11,14 @@ final sourceService = Provider<SourceService>((ref) => SourceService(BaseAPI()))
 /// ---------------------
 
 /// Creating source provider
-final sourceProvider = StateNotifierProvider.autoDispose<SourceNotifier, ListState<List<NewsSourceModel>>>((ref) 
+final sourceProvider = StateNotifierProvider.autoDispose<SourceNotifier, ListState<NewsSourceModel>>((ref) 
   => SourceNotifier(ref.watch(sourceService)));
 /// ---------------------
 
 /// Creating source notifier
-class SourceNotifier extends StateNotifier<ListState<List<NewsSourceModel>>> {
+class SourceNotifier extends StateNotifier<ListState<NewsSourceModel>> {
   SourceService sourceService;
-  SourceNotifier(this.sourceService) : super(ListState<List<NewsSourceModel>>(items: [])) {
+  SourceNotifier(this.sourceService) : super(ListState<NewsSourceModel>(items: [])) {
     getSources();
   }
 

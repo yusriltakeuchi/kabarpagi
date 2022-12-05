@@ -11,21 +11,21 @@ final newsService = Provider<NewsService>((ref) => NewsService(BaseAPI()));
 /// --------------------
 
 /// Creating news provider
-final newsProvider = StateNotifierProvider.autoDispose<NewsNotifier, ListState<List<NewsModel>>>((ref) 
+final newsProvider = StateNotifierProvider.autoDispose<NewsNotifier, ListState<NewsModel>>((ref) 
   => NewsNotifier(ref.watch(newsService)));
-final newsHeadlinesProvider = StateNotifierProvider.autoDispose<NewsHeadLineNotifier, ListState<List<NewsModel>>>((ref) 
+final newsHeadlinesProvider = StateNotifierProvider.autoDispose<NewsHeadLineNotifier, ListState<NewsModel>>((ref) 
   => NewsHeadLineNotifier(ref.watch(newsService)));
-final newsSearchProvider = StateNotifierProvider.autoDispose<NewsSearchNotifier, ListState<List<NewsModel>>>((ref) 
+final newsSearchProvider = StateNotifierProvider.autoDispose<NewsSearchNotifier, ListState<NewsModel>>((ref) 
   => NewsSearchNotifier(ref.watch(newsService)));
-final newsSourceProvider = StateNotifierProvider.autoDispose.family<NewsSourceNotifier, ListState<List<NewsModel>>, String>((ref, sourceId) 
+final newsSourceProvider = StateNotifierProvider.autoDispose.family<NewsSourceNotifier, ListState<NewsModel>, String>((ref, sourceId) 
   => NewsSourceNotifier(ref.watch(newsService), sourceId));
 /// --------------------
 
 
 /// Creating news notifier
-class NewsNotifier extends StateNotifier<ListState<List<NewsModel>>> {
+class NewsNotifier extends StateNotifier<ListState<NewsModel>> {
   NewsService newsService;
-  NewsNotifier(this.newsService) : super(ListState<List<NewsModel>>(items: [])) {
+  NewsNotifier(this.newsService) : super(ListState<NewsModel>(items: [])) {
     getNews();
   }
 
@@ -67,9 +67,9 @@ class NewsNotifier extends StateNotifier<ListState<List<NewsModel>>> {
 
 
 /// Creating news headline notifier
-class NewsHeadLineNotifier extends StateNotifier<ListState<List<NewsModel>>> {
+class NewsHeadLineNotifier extends StateNotifier<ListState<NewsModel>> {
   NewsService newsService;
-  NewsHeadLineNotifier(this.newsService) : super(ListState<List<NewsModel>>(items: [])) {
+  NewsHeadLineNotifier(this.newsService) : super(ListState<NewsModel>(items: [])) {
     getHeadLines();
   }
 
@@ -92,9 +92,9 @@ class NewsHeadLineNotifier extends StateNotifier<ListState<List<NewsModel>>> {
 }
 
 /// Creating news search notifier
-class NewsSearchNotifier extends StateNotifier<ListState<List<NewsModel>>> {
+class NewsSearchNotifier extends StateNotifier<ListState<NewsModel>> {
   NewsService newsService;
-  NewsSearchNotifier(this.newsService) : super(ListState<List<NewsModel>>(items: []));
+  NewsSearchNotifier(this.newsService) : super(ListState<NewsModel>(items: []));
 
   Future<void> search(String keyword) async {
     state = state.copyWith(isLoading: true);
@@ -113,10 +113,10 @@ class NewsSearchNotifier extends StateNotifier<ListState<List<NewsModel>>> {
 }
 
 /// Creating news source notifier
-class NewsSourceNotifier extends StateNotifier<ListState<List<NewsModel>>> {
+class NewsSourceNotifier extends StateNotifier<ListState<NewsModel>> {
   NewsService newsService;
   String sourceId;
-  NewsSourceNotifier(this.newsService, this.sourceId) : super(ListState<List<NewsModel>>(items: [])) {
+  NewsSourceNotifier(this.newsService, this.sourceId) : super(ListState<NewsModel>(items: [])) {
     getNews();
   }
 

@@ -5,7 +5,7 @@ part 'list_state.freezed.dart';
 @freezed
 abstract class ListState<T> with _$ListState<T> {
   factory ListState({
-    required T items,
+    required List<T> items,
     @Default(1) int page,
     @Default(false) bool isLoading,
     @Default(false) bool reachedMax
