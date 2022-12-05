@@ -2,6 +2,7 @@
 
 [![Fork](https://img.shields.io/github/forks/yusriltakeuchi/kabarpagi?style=social)](https://github.com/yusriltakeuchi/kabarpagi/fork)&nbsp; [![Star](https://img.shields.io/github/stars/yusriltakeuchi/kabarpagi?style=social)](https://github.com/yusriltakeuchi/kabarpagi/star)&nbsp; [![Watches](https://img.shields.io/github/watchers/yusriltakeuchi/kabarpagi?style=social)](https://github.com/yusriltakeuchi/kabarpagi/)&nbsp;
 
+<p><img  src="https://i.ibb.co/8Y05r6Q/Portfolio.png"/></p>
 
 Kabar Pagi adalah sebuah aplikasi media penyiaran berita sederhana yang bersumber pada newsapi.org, bertujuan untuk menampilkan kumpulan berita dari berbagai macam media yang ada di dunia, fokusnya terutama Indonesia. Dibuat menggunakan Framework Flutter dan state management Riverpod.
 
