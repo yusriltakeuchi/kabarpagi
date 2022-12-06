@@ -27,6 +27,7 @@ class BaseAPI implements BaseAPIImpl {
   Future<Options> _getHeaders({bool? useToken, bool? useFormData = false}) async {
     var header = <String, dynamic>{};
     header['Accept'] = 'application/json';
+    header['User-Agent'] = 'KabarPagi';
     header['Content-Type'] = useFormData == true ? 'multipart/form-data' : 'application/json';
     if (useToken == true) {
       header['Authorization'] = '';
