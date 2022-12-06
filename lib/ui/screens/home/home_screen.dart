@@ -270,7 +270,8 @@ class _HomeBodyState extends ConsumerState<HomeBody> {
 
     if (newsRef.items.isEmpty) {
       return IdleNoItemCenter(
-        title: "Tidak ada berita",
+        title: "Berita tidak ditemukan",
+        iconPathSVG: Assets.images.illustrationNotfound.path,
         color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }

@@ -1,4 +1,5 @@
 
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/data/base_api.dart';
 import 'package:kabarpagi/core/models/filter/news/filter_news_model.dart';
@@ -7,18 +8,30 @@ import 'package:kabarpagi/core/models/state/list_state.dart';
 import 'package:kabarpagi/core/services/news/news_service.dart';
 
 /// Creating news services
-final newsService = Provider<NewsService>((ref) => NewsService(BaseAPI()));
+final newsService = Provider.family<NewsService, CancelToken>((ref, cancelToken) => NewsService(BaseAPI(), cancelToken));
 /// --------------------
 
 /// Creating news provider
-final newsProvider = StateNotifierProvider.autoDispose<NewsNotifier, ListState<NewsModel>>((ref) 
-  => NewsNotifier(ref.watch(newsService)));
-final newsHeadlinesProvider = StateNotifierProvider.autoDispose<NewsHeadLineNotifier, ListState<NewsModel>>((ref) 
-  => NewsHeadLineNotifier(ref.watch(newsService)));
-final newsSearchProvider = StateNotifierProvider.autoDispose<NewsSearchNotifier, ListState<NewsModel>>((ref) 
-  => NewsSearchNotifier(ref.watch(newsService)));
-final newsSourceProvider = StateNotifierProvider.autoDispose.family<NewsSourceNotifier, ListState<NewsModel>, String>((ref, sourceId) 
-  => NewsSourceNotifier(ref.watch(newsService), sourceId));
+final newsProvider = StateNotifierProvider.autoDispose<NewsNotifier, ListState<NewsModel>>((ref) {
+  final cancelToken = CancelToken();
+  ref.onDispose(() => cancelToken.cancel());
+  return NewsNotifier(ref.watch(newsService(cancelToken)));
+});
+final newsHeadlinesProvider = StateNotifierProvider.autoDispose<NewsHeadLineNotifier, ListState<NewsModel>>((ref) {
+  final cancelToken = CancelToken();
+  ref.onDispose(() => cancelToken.cancel());
+  return NewsHeadLineNotifier(ref.watch(newsService(cancelToken)));
+});
+final newsSearchProvider = StateNotifierProvider.autoDispose<NewsSearchNotifier, ListState<NewsModel>>((ref) {
+  final cancelToken = CancelToken();
+  ref.onDispose(() => cancelToken.cancel());
+  return NewsSearchNotifier(ref.watch(newsService(cancelToken)));
+});
+final newsSourceProvider = StateNotifierProvider.autoDispose.family<NewsSourceNotifier, ListState<NewsModel>, String>((ref, sourceId) {
+  final cancelToken = CancelToken();
+  ref.onDispose(() => cancelToken.cancel());
+  return NewsSourceNotifier(ref.watch(newsService(cancelToken)), sourceId);
+});
 /// --------------------
 
 
@@ -40,7 +53,7 @@ class NewsNotifier extends StateNotifier<ListState<NewsModel>> {
       final result = await newsService.getNews(param: filter.toJson());
       state = state.copyWith(items: result.data!, isLoading: false);
     } catch (e) {
-      state = state.copyWith(isLoading: false);
+      if (mounted) state = state.copyWith(isLoading: false);
     }
   }
 
@@ -60,7 +73,7 @@ class NewsNotifier extends StateNotifier<ListState<NewsModel>> {
         state = state.copyWith(isLoading: false, reachedMax: true, items: state.items);
       }
     } catch (e) {
-      state = state.copyWith(isLoading: false, items: state.items);
+      if (mounted) state = state.copyWith(isLoading: false, items: state.items);
     }
   }
 }
@@ -86,7 +99,7 @@ class NewsHeadLineNotifier extends StateNotifier<ListState<NewsModel>> {
       final result = await newsService.getHeadLines(param: filter.toJson());
       state = state.copyWith(items: result.data!, isLoading: false);
     } catch (e) {
-      state = state.copyWith(isLoading: false);
+      if (mounted) state = state.copyWith(isLoading: false);
     }
   }
 }
@@ -107,7 +120,7 @@ class NewsSearchNotifier extends StateNotifier<ListState<NewsModel>> {
       final result = await newsService.getNews(param: filter.toJson());
       state = state.copyWith(items: result.data!, isLoading: false, reachedMax: true);
     } catch (e) {
-      state = state.copyWith(isLoading: false);
+      if (mounted) state = state.copyWith(isLoading: false);
     }
   }
 }
@@ -131,7 +144,7 @@ class NewsSourceNotifier extends StateNotifier<ListState<NewsModel>> {
       final result = await newsService.getNews(param: filter.toJson());
       state = state.copyWith(items: result.data!, isLoading: false);
     } catch (e) {
-      state = state.copyWith(isLoading: false);
+      if (mounted) state = state.copyWith(isLoading: false);
     }
   }
 
@@ -151,7 +164,7 @@ class NewsSourceNotifier extends StateNotifier<ListState<NewsModel>> {
         state = state.copyWith(isLoading: false, reachedMax: true, items: state.items);
       }
     } catch (e) {
-      state = state.copyWith(isLoading: false, items: state.items);
+      if (mounted) state = state.copyWith(isLoading: false, items: state.items);
     }
   }
 }

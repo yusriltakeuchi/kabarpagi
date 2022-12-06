@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/models/news/news_model.dart';
 import 'package:kabarpagi/core/providers/news/news_provider.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
+import 'package:kabarpagi/gen/assets.gen.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
 import 'package:kabarpagi/ui/constant/themes.dart';
 import 'package:kabarpagi/ui/router/route_list.dart';
@@ -79,7 +80,8 @@ class _NewsSourceBodyState extends ConsumerState<NewsSourceBody> {
 
     if (newsRef.items.isEmpty) {
       return IdleNoItemCenter(
-        title: "Tidak ada berita",
+        title: "Berita tidak ditemukan",
+        iconPathSVG: Assets.images.illustrationNotfound.path,
         color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }

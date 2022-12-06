@@ -1,5 +1,6 @@
 
 
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kabarpagi/core/data/base_api.dart';
 import 'package:kabarpagi/core/models/news/news_model.dart';
@@ -7,12 +8,15 @@ import 'package:kabarpagi/core/models/state/list_state.dart';
 import 'package:kabarpagi/core/services/source/source_service.dart';
 
 /// Craeting source service
-final sourceService = Provider<SourceService>((ref) => SourceService(BaseAPI()));
+final sourceService = Provider.family<SourceService, CancelToken>((ref, cancelToken) => SourceService(BaseAPI(), cancelToken));
 /// ---------------------
 
 /// Creating source provider
-final sourceProvider = StateNotifierProvider.autoDispose<SourceNotifier, ListState<NewsSourceModel>>((ref) 
-  => SourceNotifier(ref.watch(sourceService)));
+final sourceProvider = StateNotifierProvider.autoDispose<SourceNotifier, ListState<NewsSourceModel>>((ref) {
+  final cancelToken = CancelToken();
+  ref.onDispose(() => cancelToken.cancel());
+  return SourceNotifier(ref.watch(sourceService(cancelToken)));
+});
 /// ---------------------
 
 /// Creating source notifier
@@ -28,7 +32,7 @@ class SourceNotifier extends StateNotifier<ListState<NewsSourceModel>> {
       final result = await sourceService.getSources();
       state = state.copyWith(items: result.data!, isLoading: false);
     } catch (e) {
-      state = state.copyWith(isLoading: false);
+      if (mounted) state = state.copyWith(isLoading: false);
     }
   }
 }
