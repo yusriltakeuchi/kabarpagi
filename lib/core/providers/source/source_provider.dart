@@ -6,16 +6,20 @@ import 'package:kabarpagi/core/data/base_api.dart';
 import 'package:kabarpagi/core/models/news/news_model.dart';
 import 'package:kabarpagi/core/models/state/list_state.dart';
 import 'package:kabarpagi/core/services/source/source_service.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'source_provider.g.dart';
 
-/// Craeting source service
-final sourceService = Provider.family<SourceService, CancelToken>((ref, cancelToken) => SourceService(BaseAPI(), cancelToken));
+/// Creating source service with code generations
+@riverpod
+SourceService sourceService(SourceServiceRef ref, {required CancelToken cancelToken}) 
+  => SourceService(BaseAPI(), cancelToken);
 /// ---------------------
 
 /// Creating source provider
 final sourceProvider = StateNotifierProvider.autoDispose<SourceNotifier, ListState<NewsSourceModel>>((ref) {
   final cancelToken = CancelToken();
   ref.onDispose(() => cancelToken.cancel());
-  return SourceNotifier(ref.watch(sourceService(cancelToken)));
+  return SourceNotifier(ref.watch(sourceServiceProvider(cancelToken: cancelToken)));
 });
 /// ---------------------
 

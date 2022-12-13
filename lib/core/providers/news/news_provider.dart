@@ -6,31 +6,36 @@ import 'package:kabarpagi/core/models/filter/news/filter_news_model.dart';
 import 'package:kabarpagi/core/models/news/news_model.dart';
 import 'package:kabarpagi/core/models/state/list_state.dart';
 import 'package:kabarpagi/core/services/news/news_service.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-/// Creating news services
-final newsService = Provider.family<NewsService, CancelToken>((ref, cancelToken) => NewsService(BaseAPI(), cancelToken));
+part 'news_provider.g.dart';
+
+/// Creating news services with code generations
+@riverpod
+NewsService newsService(NewsServiceRef ref, {required CancelToken cancelToken}) 
+  => NewsService(BaseAPI(), cancelToken);
 /// --------------------
 
 /// Creating news provider
 final newsProvider = StateNotifierProvider.autoDispose<NewsNotifier, ListState<NewsModel>>((ref) {
   final cancelToken = CancelToken();
   ref.onDispose(() => cancelToken.cancel());
-  return NewsNotifier(ref.watch(newsService(cancelToken)));
+  return NewsNotifier(ref.watch(newsServiceProvider(cancelToken: cancelToken)));
 });
 final newsHeadlinesProvider = StateNotifierProvider.autoDispose<NewsHeadLineNotifier, ListState<NewsModel>>((ref) {
   final cancelToken = CancelToken();
   ref.onDispose(() => cancelToken.cancel());
-  return NewsHeadLineNotifier(ref.watch(newsService(cancelToken)));
+  return NewsHeadLineNotifier(ref.watch(newsServiceProvider(cancelToken: cancelToken)));
 });
 final newsSearchProvider = StateNotifierProvider.autoDispose<NewsSearchNotifier, ListState<NewsModel>>((ref) {
   final cancelToken = CancelToken();
   ref.onDispose(() => cancelToken.cancel());
-  return NewsSearchNotifier(ref.watch(newsService(cancelToken)));
+  return NewsSearchNotifier(ref.watch(newsServiceProvider(cancelToken: cancelToken)));
 });
 final newsSourceProvider = StateNotifierProvider.autoDispose.family<NewsSourceNotifier, ListState<NewsModel>, String>((ref, sourceId) {
   final cancelToken = CancelToken();
   ref.onDispose(() => cancelToken.cancel());
-  return NewsSourceNotifier(ref.watch(newsService(cancelToken)), sourceId);
+  return NewsSourceNotifier(ref.watch(newsServiceProvider(cancelToken: cancelToken)), sourceId);
 });
 /// --------------------
 
