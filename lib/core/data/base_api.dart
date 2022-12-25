@@ -5,13 +5,12 @@ import 'package:kabarpagi/core/config/config.dart';
 import 'package:kabarpagi/core/data/api.dart';
 import 'package:kabarpagi/core/data/base_api_impl.dart';
 import 'package:kabarpagi/core/models/api/api_response.dart';
-import 'package:kabarpagi/injector.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 
 class BaseAPI implements BaseAPIImpl {
   Dio? _dio;
-  final endpoint = locator<Api>();
+  final endpoint = Api();
 
   /// Initialize constructors
   BaseAPI() {

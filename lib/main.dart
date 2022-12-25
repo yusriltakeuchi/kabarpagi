@@ -10,7 +10,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:kabarpagi/core/providers/theme/theme_provider.dart';
 import 'package:kabarpagi/core/utils/navigation/navigation_utils.dart';
-import 'package:kabarpagi/injector.dart';
 import 'package:kabarpagi/ui/constant/constant.dart';
 import 'package:kabarpagi/ui/constant/themes.dart';
 import 'package:kabarpagi/ui/router/route_list.dart';
@@ -19,7 +18,6 @@ import 'package:kabarpagi/ui/router/router_generator.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   /// Setup injector
-  await setupLocator();
   await ScreenUtil.ensureScreenSize();
   await initializeDateFormatting("id", null);
   runApp(const ProviderScope(child: MyApp()));
@@ -69,7 +67,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     final isDarkTheme = ref.watch(themeProvider);
     return MaterialApp(
       title: 'Kabar Pagi',
-      navigatorKey: locator<NavigationUtils>().navigatorKey,
+      navigatorKey: navigate.navigatorKey,
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,

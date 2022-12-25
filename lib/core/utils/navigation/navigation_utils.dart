@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:kabarpagi/injector.dart';
 
+final navigate = NavigationUtils();
 class NavigationUtils {
   /// Global key to use in navigator
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -25,6 +25,3 @@ class NavigationUtils {
   dynamic pop({dynamic data}) 
     => navigatorKey.currentState!.pop(data);
 }
-
-final navigate = locator<NavigationUtils>();
-
