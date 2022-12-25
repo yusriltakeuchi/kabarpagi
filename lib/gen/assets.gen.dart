@@ -45,13 +45,13 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/illustration_notfound.svg
-  SvgGenImage get illustrationNotfound =>
-      const SvgGenImage('assets/images/illustration_notfound.svg');
+  /// File path: assets/images/illustration_notfound.jpg
+  AssetGenImage get illustrationNotfound =>
+      const AssetGenImage('assets/images/illustration_notfound.jpg');
 
-  /// File path: assets/images/illustration_search.svg
-  SvgGenImage get illustrationSearch =>
-      const SvgGenImage('assets/images/illustration_search.svg');
+  /// File path: assets/images/illustration_search.jpg
+  AssetGenImage get illustrationSearch =>
+      const AssetGenImage('assets/images/illustration_search.jpg');
 }
 
 class Assets {

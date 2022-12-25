@@ -48,11 +48,10 @@ class IdleLoadingWithoutCenter extends StatelessWidget {
 }
 
 class IdleNoItemCenter extends StatelessWidget {
-
   final String? title;
   final Color? color;
   final bool useDeviceHeight;
-  final String? iconPathSVG;
+  final String? iconPath;
   final bool? useCenterText;
   final double? paddingTop;
 
@@ -60,7 +59,7 @@ class IdleNoItemCenter extends StatelessWidget {
     @required this.title,
     this.color,
     this.useDeviceHeight = true,
-    this.iconPathSVG,
+    this.iconPath,
     this.useCenterText = true,
     this.paddingTop = 0
   }) : super(key: key);
@@ -72,7 +71,7 @@ class IdleNoItemCenter extends StatelessWidget {
       height: useDeviceHeight 
         ? deviceHeight / 2
         : null,
-      child: iconPathSVG == null 
+      child: iconPath == null 
       ? (
           useCenterText == true
             ? Center(
@@ -100,9 +99,9 @@ class IdleNoItemCenter extends StatelessWidget {
       : Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SvgPicture.asset(
-            iconPathSVG ?? "", 
-            width: setWidth(deviceWidth), 
+          Image.asset(
+            iconPath ?? "", 
+            width: deviceWidth, 
             height: deviceHeight * 0.3
           ),
           Text(

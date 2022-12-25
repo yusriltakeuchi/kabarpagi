@@ -59,7 +59,7 @@ class NewsSearchBody extends ConsumerWidget {
     if (newsRef.isLoading == false && newsRef.reachedMax == false) {
       return IdleNoItemCenter(
         title: "Mau cari berita apa hari ini?",
-        iconPathSVG: Assets.images.illustrationSearch.path,
+        iconPath: Assets.images.illustrationSearch.path,
         color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }
@@ -71,7 +71,7 @@ class NewsSearchBody extends ConsumerWidget {
     if (newsRef.items.isEmpty) {
       return IdleNoItemCenter(
         title: "Berita yang Anda cari tidak ditemukan",
-        iconPathSVG: Assets.images.illustrationNotfound.path,
+        iconPath: Assets.images.illustrationNotfound.path,
         color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }

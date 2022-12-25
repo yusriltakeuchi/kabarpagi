@@ -81,7 +81,7 @@ class _NewsSourceBodyState extends ConsumerState<NewsSourceBody> {
     if (newsRef.items.isEmpty) {
       return IdleNoItemCenter(
         title: "Berita tidak ditemukan",
-        iconPathSVG: Assets.images.illustrationNotfound.path,
+        iconPath: Assets.images.illustrationNotfound.path,
         color: isDarkTheme(context) ? Colors.white : blackColor,
       );
     }
